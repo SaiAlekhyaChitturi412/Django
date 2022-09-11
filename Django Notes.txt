@@ -1,0 +1,100 @@
+freecodecamp
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+17-05-2022
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+investigated settings.py
+--created super user by running "python manage.py createsuperuser" - user ID:alex, password : Alekhya412$
+--create a new brand new App- "python manage.py startapp name" 
+	1. created a new app called "Product"
+	2. In model.py entered lines of code
+		class Products(models.Model):
+   		 	title = models.TextField()
+   			 description = models.TextField()
+    			price = models.TextField()
+   		 	summary = models.TextField(default='This product is good')
+	3. In admin.py entered lines of code
+		from .models import Products
+		admin.site.register(Products)
+	4. entered Products app in settings.py under Installed_Apps
+	5. run python migrate.py makemigrations
+	6. run python migrate.py migrate
+	7.check whether Products is added to admin URL when executed
+--create an objects of the Products from manage.py shell
+	1. go to Terminal
+	2. type in python manage.py shell
+	3. from products.model import Product
+	4.Product.objects.all() --it basically gives you how many products are there
+	5.Product.objects.create(title="newProduct",description = "another description",price="1000",summary="sweet")
+	6. basically the above command adds the brand new objects to the Products , when we check them in admin URL ,it shows you all the product details that you have created.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+18-05-2022 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Investigating New Model Fields
+	1. Normally in the above , we used only one Model Field that is "TextField()"
+	2. Django also Provides more Fields , like CharFiled, DecimalField etc, hands on below code in model.py in Product
+		class Products(models.Model):
+    			title = models.CharField(max_length=120)
+    			description = models.TextField(blank=True,null=True)
+  			price = models.DecimalField(decimal_places=2,max_digits=1000)
+    			summary = models.TextField()
+	3. added one more filed in the model.py i.e featured = models.BooleanField()
+	4.here in the above models field there should be given some value, since it is not given in code, when we run the command python manag.py makemigrations, it will ask you to choose whether it is False or True
+	5. and in description if you give Blank=True and null = False--- the corresponding fields will be not a bold , vice-versa the corresponding fields will be not bold
+
+--Changing Default Home Page to a Custom Home Page
+	1.Created the new App called "pages"
+	2.Now write the below code in views.py under pages folder
+		from django.shortcuts import render
+		from django.http import  HttpResponse
+		# Create your views here.
+		def home_view(*args, **kwargs):
+    			return HttpResponse("<h1>Hello World<h1>") #string of HTML_CODE
+	3. Now add the above views in url.py
+		from django.contrib import admin
+		from django.urls import path
+		from pages.views import home_view
+
+		urlpatterns = [
+   			 path('',home_view,name='home'),
+  			  path('admin/', admin.site.urls),
+			]
+	4. Now check whether the Home Page is showing the "Hello World"
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+21-05-2022
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--URL Routing and Requests 
+	1.we can add our custome URLs in url.py
+	2.with the following code when we run the server and type in "/home" it shows you the same "Hello World" 
+		from django.contrib import admin
+		from django.urls import path
+		from pages.views import home_view
+
+		urlpatterns = [
+   			 path('',home_view,name='home'),
+   			 path('home/',home_view,name='home'),
+   			 path('admin/', admin.site.urls),
+			]
+	3.you can add multiple views in view.py as shown in below,apart from home_view,we also have contact_view and in url.py you add the code in order view the contact_view.
+		def contact_view(*args,**kwargs)://view.py
+   			 return HttpResponse("<h1> you are in Contact view")
+
+		path('contact/', contact_view, name='home') //url.py -import contatct_view from view.py
+	4. as we can see , we have few arguments in the function , which has "args & kwargs" , if we add a request as another argument and you add print(request.user) in the code, after running ,in the console you will the username who logged inside, here the user could be alex(since username is alex)
+
+--django Templates
+	1. normally rendering just <h1> tage doesn't seems to be normal ,so in order to have a whole brand HTML format , we use django Templates
+	2.so for this we already have a template folder under the base folder, where it stores all HTML files
+	3. so we created a new HTML file called 'home.html' under it and added <h1> and <p> tag 
+	4.if you are seeing any error after running the server , that means you have not configured the template folder in Templates section of settings.py 
+	5. defaultly template folder is configured in templates section, but in order to configure it, move to Template section and add 'DIRS': [BASE_DIR / 'templates'] 
+	6. now you can see the page rendered perfectly
+
+--Django Template Engine Basics-Inheritance
+	1.The main of Django Template engine-Inheritance is like to render multiple HTML pages 
+	2. To do this we have to create a  new file named "Base.html" under templates folder
+	3.
+	
+1:16:51		
+
+
+
