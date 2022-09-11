@@ -97,4 +97,7 @@ investigated settings.py
 1:16:51		
 
 
+----------------------------------------------------
+Udmey Course 
 
+1. to install python -- "pip install django" in command prompt
