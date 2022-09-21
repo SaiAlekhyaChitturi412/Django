@@ -101,3 +101,9 @@ investigated settings.py
 Udmey Course 
 
 1. to install django -- "pip install django" in command prompt
+2. To start a project you need to run the command in command prompt "django-admin startproject projectname"
+3. To run the Django server type the command "python manage.py runserver"
+4. To create an app under Django project type the command "python manage.py startapp appname"
+5. The above commands create the brand new app,and that app contains a new python file named "views.py" when compared with myprojectapp
+6. also the new app has URL.py which is integrated with myproject urls.py (to know more about this watch udemy  section-8 last video )
+7.10:55
