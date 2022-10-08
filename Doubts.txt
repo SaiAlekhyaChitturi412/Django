@@ -1,0 +1,5 @@
+1.whether we can use two functions in views.py(my_app)?
+Ans: we can use the below code in URLs.py 
+
+    path('index_view',views.index,name='index'), when we navigate to my_app/index_view gives index_view content
+    path('simple_view',views.simple_view,name='simpleView')  when we navigate to my_app/siple_view gives simple_view content

@@ -5,3 +5,6 @@ from django.http import HttpResponse
 
 def index(request):
     return HttpResponse("Hello Its Working")
+
+def simple_view(request):
+    return HttpResponse("Simple View inside my_app")
