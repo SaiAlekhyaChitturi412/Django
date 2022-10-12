@@ -25,7 +25,7 @@ urlpatterns = [
     path('my_app/',include('my_app.urls')),
     path('admin/', admin.site.urls),
     # path('',home_view),
-    path('homes_view',views.homes_view),
-    path('login_view',views.login_view)
+    # path('homes_view',views.homes_view),
+    # path('login_view',views.login_view)
 
 ]
